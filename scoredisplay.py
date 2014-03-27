@@ -1,4 +1,4 @@
-# ----------------------------------------------------------
+# -------------------------------------------------------------------------------------
 # _______         _____  _     _ _______
 # |_____| |      |_____] |_____| |_____|
 # |     | |_____ |       |     | |     |
@@ -11,10 +11,12 @@
 # |     \   |   |______ |_____] |      |_____|   \_/  
 # |_____/ __|__ ______| |       |_____ |     |    |   
 #
-# ----------------------------------------------------------
+# -------------------------------------------------------------------------------------
 # Score Display Mode for Alphanumeric Display Games
 #
-# Controls displays during game play and provides various transition effects for displaying text during modes.
+# Controls displays during game play and provides various transition effects for 
+# displaying text during modes.
+# 
 # Repeating script list included for attract usage
 #
 # Copyright (C) 2013 myPinballs, Orange Cloud Software Ltd
@@ -29,7 +31,19 @@
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #
-# -------------------------
+# -------------------------------------------------------------------------------------
+#  _______  ______ _______ __   _ _______ _____ _______ _____  _____  __   _ _______
+#     |    |_____/ |_____| | \  | |______   |      |      |   |     | | \  | |______
+#     |    |    \_ |     | |  \_| ______| __|__    |    __|__ |_____| |  \_| ______|
+# 
+# -------------------------------------------------------------------------------------
+# Transition 0: Fixed top and bottom, centered
+# Transition 1: Slide in top and bottom, from right to left, left justified
+# Transition 2: Fixed top, slide in bottom from right to left, centered
+# Transition 3: Reveal out from center top and bottom, centered
+# Transition 4: Fixed top, flashing bottom, centered
+# -------------------------------------------------------------------------------------
+
 
 import procgame
 import locale
