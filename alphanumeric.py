@@ -3,12 +3,12 @@ import pinproc
 class AlphanumericDisplay(object):
 	# Start at ASCII table offset 32: ' ' 
 	asciiSegments = [0x0000,  # ' '
-                         0x016a,  # '!' Debris Character 1
-                         0x3014,  # '"' Debris Character 2
-                         0x5d80,  # '#' Debris Character 3
-                         0x00a4,  # '$' Debris Character 4
-                         0x3270,  # '%' Debris Character 5
-                         0x4640,  # '&' Debris Character 6
+                         0x016a,  # '!' Random Debris Character 1
+                         0x3014,  # '"' Random Debris Character 2
+                         0x5d80,  # '#' Random Debris Character 3
+                         0x00a4,  # '$' Random Debris Character 4
+                         0x3270,  # '%' Random Debris Character 5
+                         0x4640,  # '&' Random Debris Character 6
                          0x0200,  # '''
                          0x1400,  # '('
                          0x4100,  # ')'
@@ -19,7 +19,7 @@ class AlphanumericDisplay(object):
                          0x8000,  # '.'
                          0x4400,  # '/'
   
-                         0x003f,  # '0'0x003f
+                         0x003f,  # '0'
                          0x0006,  # '1'
                          0x085b,  # '2'
                          0x084f,  # '3'
@@ -30,16 +30,16 @@ class AlphanumericDisplay(object):
                          0x087f,  # '8'
                          0x086f,  # '9'
   
-                         0x0000,  # ':'
-                         0x0000,  # ';'
-                         0x0000,  # '<'
-                         0x0000,  # '='
-                         0x0000,  # '>'
-                         0x0000,  # '?'
-                         0x0000,  # '@'
-      
-                         0x0877,  # 'A'0877
-                         0x2a0f,  # 'B'2a4f
+                         0x0821,  # ':' Random Debris Character 7
+                         0x1004,  # ';' Random Debris Character 8
+                         0x1c00,  # '<' Left Arrow
+                         0x1386,  # '=' Random Debris Character 9
+                         0x4140,  # '>' Right Arrow
+                         0x0045,  # '?' Random Debris Character 10
+                         0x4820,  # '@' Random Debris Character 11
+
+                         0x0877,  # 'A'
+                         0x2a4f,  # 'B'
                          0x0039,  # 'C'
                          0x220f,  # 'D'
                          0x0879,  # 'E'
@@ -60,10 +60,44 @@ class AlphanumericDisplay(object):
                          0x2201,  # 'T'
                          0x003e,  # 'U'
                          0x4430,  # 'V'
-                         0x5036,  # 'W' 
+                         0x5036,  # 'W'
                          0x5500,  # 'X'
                          0x2500,  # 'Y'
-                         0x4409   # 'Z'
+                         0x4409,  # 'Z'
+
+                         0x6004,  # '[' Random Debris Character 12
+                         0x6411,  # '\' Random Debris Character 13
+                         0x780a,  # ']' Random Debris Character 14
+                         0x093a,  # '^' Random Debris Character 15
+                         0x0008,  # '_'
+                         0x2220,  # '`' Random Debris Character 16
+
+                         0x0c56,  # 'a' Broken Letter a
+                         0x684e,  # 'b' Broken Letter b
+                         0x081c,  # 'c' Broken Letter c
+                         0x380e,  # 'd' Broken Letter d
+                         0x1178,  # 'e' Broken Letter e
+                         0x4831,  # 'f' Broken Letter f
+                         0x083d,  # 'g' Broken Letter g NOT CREATED YET
+                         0x0854,  # 'h' Broken Letter h
+                         0x2209,  # 'i' Broken Letter i NOT CREATED YET
+                         0x001e,  # 'j' Broken Letter j NOT CREATED YET
+                         0x1070,  # 'k' Broken Letter k
+                         0x0038,  # 'l' Broken Letter l NOT CREATED YET
+                         0x0536,  # 'm' Broken Letter m NOT CREATED YET
+                         0x1136,  # 'n' Broken Letter n NOT CREATED YET
+                         0x085c,  # 'o' Broken Letter o
+                         0x0873,  # 'p' Broken Letter p NOT CREATED YET
+                         0x103f,  # 'q' Broken Letter q NOT CREATED YET
+                         0x1c72,  # 'r' Broken Letter r
+                         0x116c,  # 's' Broken Letter s
+                         0x2120,  # 't' Broken Letter t
+                         0x003e,  # 'u' Broken Letter u NOT CREATED YET
+                         0x4430,  # 'v' Broken Letter v NOT CREATED YET
+                         0x5036,  # 'w' Broken Letter w NOT CREATED YET
+                         0x5500,  # 'x' Broken Letter x NOT CREATED YET
+                         0x2500,  # 'y' Broken Letter y NOT CREATED YET
+                         0x4409   # 'z' Broken Letter z NOT CREATED YET
                         ]
 
 	strobes = [8,9,10,11,12]
