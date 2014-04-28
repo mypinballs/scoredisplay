@@ -57,7 +57,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 	def __init__(self, game, priority, left_players_justify="right"):
 		super(AlphaScoreDisplay, self).__init__(game, priority)
 
-                self.log = logging.getLogger('whirlwind.alpha_display')
+                self.log = logging.getLogger('scoredisplay.alpha_display')
                 
                 #set the position of the rhs of score for each player
                 self.player_score_posn=[8,15,8,15]
