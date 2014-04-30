@@ -39,7 +39,7 @@ class AlphanumericDisplay(object):
                          0x4820,  # '@' Random Debris Character 11
 
                          0x0877,  # 'A'
-                         0x2a4f,  # 'B'
+                         0x2a0f,  # 'B'
                          0x0039,  # 'C'
                          0x220f,  # 'D'
                          0x0879,  # 'E'
