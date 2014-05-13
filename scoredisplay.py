@@ -60,7 +60,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.log = logging.getLogger('scoredisplay.alpha_display')
                 
                 #set the position of the rhs of score for each player
-                self.player_score_posn=[8,15,8,15]
+                self.player_score_posn=[8,16,8,16]
 
 
                 #set the starting point for a rhs transition
@@ -121,15 +121,16 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 		if score == 0:
 			return '00'
 		else:
-			return locale.format("%d", score, True)
+			#return locale.format("%d", score, True)
+                        return str(score)
 
         def update_layer(self):
                 super(AlphaScoreDisplay, self).update_layer()
 
 		if self.game.ball >0:
-                    text = "BALL %d" % (self.game.ball)
+                    text = " BALL %d " % (self.game.ball)
                     if self.game.current_player_index<3: #move text if player 4
-                        posn = 9
+                        posn = 8
                     else:
                         posn = 0
                    
