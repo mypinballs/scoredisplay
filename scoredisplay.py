@@ -221,6 +221,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 
 
         def set_text_blink(self,data):
+            self.text_set = True
             delay=data[0]
             row=data[1]
 
@@ -295,6 +296,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
             
 
         def set_transition_in(self,text,row,justify='left',seconds=0):
+            self.text_set = True
             size = len(text)
 
             if justify=='left':
@@ -327,6 +329,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 
 
         def set_transition_reveal(self,text,row,seconds=0):
+            self.text_set = True
             size = len(text)
             
             #create curtain
