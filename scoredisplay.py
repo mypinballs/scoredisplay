@@ -62,12 +62,10 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 #set the position of the rhs of score for each player
                 self.player_score_posn=[8,16,8,16]
 
-
                 #set the starting point for a rhs transition
                 self.transition_posn = [17,17]
-
                 self.transition_reveal_posn = [0,0]
-
+                
                 #flags
                 self.blink_flag = False
                 self.text_set = False
@@ -76,7 +74,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.reset()
 
         def reset(self):
-                self.log.debug('reset called')
+                self.log.debug('reset called')    
                 #cancel any delays
                 for i in range(2):
                     self.cancel_delayed('text_blink_repeat'+str(i))
@@ -292,11 +290,15 @@ class AlphaScoreDisplay(game.ScoreDisplay):
             self.cancel_delayed('display_script_ttext')
             self.cancel_delayed('display_script_btext')
             self.cancel_delayed('display_script_repeat')
+            self.cancel_delayed('text_blink_repeat0')
+            self.cancel_delayed('text_blink_repeat1')
             self.restore()
             
 
         def set_transition_in(self,text,row,justify='left',seconds=0):
             self.text_set = True
+            self.cancel_delayed('text_blink_repeat'+str(row)) #cancel any active blinking
+            
             size = len(text)
 
             if justify=='left':
@@ -330,6 +332,8 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 
         def set_transition_reveal(self,text,row,seconds=0):
             self.text_set = True
+            self.cancel_delayed('text_blink_repeat'+str(row)) #cancel any active blinking
+            
             size = len(text)
             
             #create curtain
