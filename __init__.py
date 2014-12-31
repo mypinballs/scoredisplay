@@ -1,1 +1,1 @@
-__all__ = ["alphanumeric", "scoredisplay"]
+__all__ = ["alphanumeric", "scoredisplay", "desktop"]

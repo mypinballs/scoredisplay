@@ -384,6 +384,10 @@ class AlphaScoreDisplay(game.ScoreDisplay):
             #using gerry's builtin procgame method for now
             #write the data to the display
             self.game.alpha_display.display([''.join(self.top_text_data),''.join(self.bottom_text_data)])
+            
+            if self.game.draw_desktop:
+                self.game.desktop.draw([''.join(self.top_text_data),''.join(self.bottom_text_data)])
+
             #debug
-            self.log.debug('top text:%s',self.top_text_data)
-            self.log.debug('bottom text:%s',self.bottom_text_data)
+            #self.log.debug('top text:%s',self.top_text_data)
+            #self.log.debug('bottom text:%s',self.bottom_text_data)
