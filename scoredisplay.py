@@ -67,6 +67,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.transition_reveal_posn = [0,0]
                 
                 #flags
+                self.multi_player_start = False
                 self.blink_flag = False
                 self.text_set = False
 
@@ -96,7 +97,10 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 #setup the display data store lists
                 #self.top_text_data_store = self.top_text_data
                 #self.bottom_text_data_store = self.bottom_text_data
-                    
+                
+                self.comma_added = False
+                self.top_text_data_score=[]
+                self.bottom_text_data_score=[]
                 #update the data
                 self.update_alpha_display()
 
@@ -135,7 +139,8 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                     if not self.text_set:
                         self.bottom_text_data[posn:posn+len(text)] = text
                         #update the data
-                        self.update_alpha_display()
+                        self.add_score_commas()
+                        self.update_alpha_display_scores()
 
 	def update_layer_1p(self):
                 super(AlphaScoreDisplay, self).update_layer_1p()
@@ -148,15 +153,22 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                         if not self.text_set:
                             #add the score as right justified in player 1s posn
                             self.top_text_data[posn-len(score):posn] = score
+                            
                             #update the data
-                            self.update_alpha_display()
+                            self.add_score_commas()
+                            self.update_alpha_display_scores()
                         
         def update_layer_4p(self):
                 super(AlphaScoreDisplay, self).update_layer_4p()
+                if not self.multi_player_start:
+                    self.reset()
+                    self.multi_player_start = True
+                
 		for i in range(len(self.game.players[:4])): # Limit to first 4 players for now.
 			score = self.game.players[i].score
                         formatted_score = self.format_digit_score(score)
                         #adjust posn for scores bigger than 10 Mil on players 1 and 3
+                        self.log.info("player %s score posn is %s",i,self.player_score_posn[i])
                         if score>=10000000 and (i==0 or i==2):
                             posn = self.player_score_posn[i]+1
                         else:
@@ -169,8 +181,9 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                             else:
                                 self.bottom_text_data[posn-len(formatted_score):posn] = formatted_score
 
-                            #update the data
-                            self.update_alpha_display()
+                #update the data
+                self.add_score_commas()
+                self.update_alpha_display_scores()
 
 
         def set_text(self,text,row,justify='center',opaque=True,blink_rate=0,seconds=0):
@@ -215,6 +228,7 @@ class AlphaScoreDisplay(game.ScoreDisplay):
 
             #timer to restore the scores
             if seconds>0:
+                self.cancel_delayed('restore_display')
                 self.delay(name='restore_display',delay=seconds,handler=self.restore)
 
 
@@ -376,9 +390,47 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.transition_reveal_posn[row] = 0
                 if seconds>0:
                     self.delay(name='restore_display',delay=seconds,handler=self.restore)
-
             
-
+            
+        def add_score_commas(self):
+            adjust=0
+            self.top_text_data_score=[]
+            for data in self.top_text_data:
+                self.top_text_data_score.append(data)
+            
+            self.bottom_text_data_score=[]
+            for data in self.bottom_text_data:
+                self.bottom_text_data_score.append(data)
+                
+            for player_id in range(len(self.game.players)):
+                score = self.game.players[player_id].score
+                
+                if player_id==0 or player_id==2:
+                    adjust=0
+                    
+                
+                if score>=10000000 and (player_id==0 or player_id==2): #adjust posn for scores bigger than 10 Mil on players 1 and 3
+                    posn = self.player_score_posn[player_id]+1
+                elif len(self.game.players)==1: #adjust the score posn if only single player to allow bigger score more easily
+                    posn = self.player_score_posn[player_id]+1
+                else:
+                    posn = self.player_score_posn[player_id]+adjust
+                    
+                if score>999:
+                    if player_id<2:
+                        self.top_text_data_score.insert(posn-3,',')
+                    else:
+                        self.bottom_text_data_score.insert(posn-3,',')
+                    adjust+=1
+                    
+                if score>999999:
+                    if player_id<2:
+                        self.top_text_data_score.insert(posn-6,',')
+                    else:
+                       self.bottom_text_data_score.insert(posn-6,',')
+                    adjust+=1
+                       
+                
 
 	def update_alpha_display(self):
             #using gerry's builtin procgame method for now
@@ -391,3 +443,11 @@ class AlphaScoreDisplay(game.ScoreDisplay):
             #debug
             #self.log.debug('top text:%s',self.top_text_data)
             #self.log.debug('bottom text:%s',self.bottom_text_data)
+            
+        def update_alpha_display_scores(self):
+            #using gerry's builtin procgame method for now
+            #write the data to the display
+            self.game.alpha_display.display([''.join(self.top_text_data_score),''.join(self.bottom_text_data_score)])
+            
+            if self.game.draw_desktop:
+                self.game.desktop.draw([''.join(self.top_text_data_score),''.join(self.bottom_text_data_score)])
